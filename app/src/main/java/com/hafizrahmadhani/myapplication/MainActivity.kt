@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp{
+            MyApp {
                 MyScreenContent()
             }
         }
@@ -38,43 +38,18 @@ fun MyApp(content: @Composable () -> Unit) {
     }
 }
 
-
 @Composable
-fun Greeting(name: String) {
-    Surface(color = Color.Yellow) {
-        Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
-    }
-}
-
-@Composable
-fun MyScreenContent(names : List<String> = List(1000) {"Hello Android #$it"}){
-    val counterState = remember { mutableStateOf(0)}
+fun MyScreenContent(names: List<String> = List(1000) { "Hello Android #$it" }) {
+    val counterState = remember { mutableStateOf(0) }
 
     Column(modifier = Modifier.fillMaxHeight()) {
-        Column(modifier = Modifier.weight(1f)) {
-            for (name in names) {
-                Greeting(name = name)
-                Divider(color = Color.Black)
-            }
-        }
+        NameList(names, Modifier.weight(1f))
         Counter(
             count = counterState.value,
-            updateCount = {newCount ->
+            updateCount = { newCount ->
                 counterState.value = newCount
             }
         )
-    }
-}
-
-@Composable
-fun Counter(count: Int, updateCount: (Int) -> Unit){
-    Button(
-        onClick = {updateCount(count+1)},
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = if(count > 5) Color.Green else Color.White
-        )
-    ) {
-        Text("I've been clicked $count times")
     }
 }
 
@@ -88,10 +63,27 @@ fun NameList(names: List<String>, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+@Composable
+fun Greeting(name: String) {
+    Text(text = "Hello $name!", modifier = Modifier.padding(24.dp))
+}
+
+@Composable
+fun Counter(count: Int, updateCount: (Int) -> Unit) {
+    Button(
+        onClick = { updateCount(count + 1) },
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = if (count > 5) Color.Green else Color.White
+        )
+    ) {
+        Text("I've been clicked $count times")
+    }
+}
+
+@Preview("MyScreen preview")
 @Composable
 fun DefaultPreview() {
-    MyApp{
+    MyApp {
         MyScreenContent()
     }
 }
