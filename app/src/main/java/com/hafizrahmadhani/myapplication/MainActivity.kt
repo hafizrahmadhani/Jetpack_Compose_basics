@@ -25,12 +25,6 @@ class MainActivity : ComponentActivity() {
             MyApp{
                 MyScreenContent()
             }
-//            MyApplicationTheme {
-//                // A surface container using the 'background' color from the theme
-//                Surface(color = MaterialTheme.colors.background) {
-//                    Greeting("Android")
-//                }
-//            }
         }
     }
 }
@@ -97,9 +91,6 @@ fun NameList(names: List<String>, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-//    MyApplicationTheme {
-//        Greeting("Android")
-//    }
     MyApp{
         MyScreenContent()
     }
